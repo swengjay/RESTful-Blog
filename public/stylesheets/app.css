@@ -1,0 +1,29 @@
+i.icon {
+	font-size: 2em;
+}
+
+.container.main {
+	margin-top: 7.0em;
+}
+
+#delete {
+	display: inline;
+}
+
+i.icon.large2x{
+ font-size: 1em;
+}
+
+.show{
+	padding-bottom: 15px;
+}
+
+.ck-editor__editable_inline {
+    overflow: auto;
+    padding: 2em;
+    border: 1px solid transparent;
+}
+
+.ui.centered.images, .ui.centered.image {
+	padding-bottom: 25px;
+}
