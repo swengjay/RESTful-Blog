@@ -3,10 +3,10 @@
 
 // Call the packages we need.
 const expressSanitizer = require("express-sanitizer"),
-methodOverride 		 = require("method-override"),
-bodyParser 		     = require('body-parser'),
-express 	 	     = require('express'),
-app 		  	     = express();
+methodOverride 		   = require("method-override"),
+bodyParser 		       = require('body-parser'),
+express 	 	       = require('express'),
+app 		  	       = express();
 
 // App Configuration.
 app.set('view engine', 'ejs');
