@@ -79,6 +79,4 @@ app.delete("/blogs/:id", (req, res) => {
 	});
 });
 
-app.listen(3000, function() {
-  console.log("Blog App");
-});
+app.listen(3000, () => console.log("Blog App"));
