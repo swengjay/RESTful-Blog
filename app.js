@@ -24,83 +24,58 @@ const Blog = require('./app/models/Blog.js');
 
 // RESTFul Routes
 
-app.get("/", function(req, res){
-	res.redirect("/blogs");
-});
+app.get("/", (req, res) => res.redirect("/blogs"));
 
 // INDEX ROUTE
-app.get("/blogs", function(req, res){
-	Blog.find({}, function(err, blogs) {
-		if(err) {
-			console.log("ERROR!");
-		} else {
-			res.render("index", {blogs: blogs});
-		}
+app.get("/blogs", (req, res) => {
+	Blog.find({}, (err, blogs) => {
+		if(err) console.log("ERROR!");
+		else res.render("index", {blogs: blogs});
 	});
 });
 
 // NEW ROUTE
-app.get("/blogs/new", function(req, res){
-	res.render("new");
-});
+app.get("/blogs/new", (req, res) => res.render("new"));
 
 // CREATE ROUTE
-app.post("/blogs", function(req, res) {
-	console.log(req.body);
+app.post("/blogs",(req, res) => {
 	req.body.blog.body = req.sanitize(req.body.blog.body);
-	console.log("==========");
-	console.log(req.body);
-	Blog.create(req.body.blog, function(err, newBlog) {
-		if(err) {
-			res.render("new");
-		} else {
-			res.redirect("/blogs");
-		}
+	Blog.create(req.body.blog, (err, newBlog) => {
+		if(err) res.render("new");
+		else res.redirect("/blogs");
 	});
 });
 
 // SHOW ROUTE
-app.get("/blogs/:id", function(req, res) {
-	Blog.findById(req.params.id, function(err, foundBlog) {
-		if(err) {
-			res.redirect("/blogs");
-		} else {
-			res.render("show", {blog:foundBlog});
-		}
+app.get("/blogs/:id", (req, res) => {
+	Blog.findById(req.params.id, (err, foundBlog) => {
+		if(err) res.redirect("/blogs");
+		else res.render("show", {blog:foundBlog});
 	})
 });
 
 // EDIT ROUTE
-app.get("/blogs/:id/edit", function(req, res) {
-	Blog.findById(req.params.id, function(err, foundBlog) {
-		if(err) {
-			res.redirect("/blogs");
-		} else {
-			res.render("edit", {blog: foundBlog});
-		}
+app.get("/blogs/:id/edit", (req, res) => {
+	Blog.findById(req.params.id, (err, foundBlog) => {
+		if(err) res.redirect("/blogs");
+		else res.render("edit", {blog: foundBlog});
 	});
 });
 
 // UPDATE ROUTE
-app.put("/blogs/:id", function(req, res) {
+app.put("/blogs/:id", (req, res) => {
 	req.body.blog.body = req.sanitize(req.body.blog.body);
-	Blog.findByIdAndUpdate(req.params.id, req.body.blog, function(err, updatedBlog) {
-		if(err) {
-			res.redirect("/blogs");
-		} else {
-			res.redirect("/blogs/" + req.params.id);
-		}
+	Blog.findByIdAndUpdate(req.params.id, req.body.blog, (err, updatedBlog) => {
+		if(err) res.redirect("/blogs");
+		else res.redirect("/blogs/" + req.params.id);
 	});
 });
 
 // DELETE ROUTE
-app.delete("/blogs/:id", function(req, res) {
-	Blog.findByIdAndRemove(req.params.id, function(err) {
-		if(err) {
-			res.redirect("/blogs");
-		} else {
-			res.redirect("/blogs");
-		} 
+app.delete("/blogs/:id", (req, res) => {
+	Blog.findByIdAndRemove(req.params.id, (err) => {
+		if(err) res.redirect("/blogs");
+		else res.redirect("/blogs");
 	});
 });
 
